@@ -19,7 +19,7 @@
          padding: 0;
          height: 100vh;
          font-family: "Segoe UI", sans-serif;
-         background-image: url("fondoprincipal.jpeg") ;
+         background-image: url("https://images5.alphacoders.com/134/1344939.jpeg") ;
          background-size: cover;
          background-position: center;
          background-attachment: fixed;
@@ -67,18 +67,28 @@
          border: 5px solid #ffcc00;
       }
 
-      .card-placeholder {
+      .card-face {
          width: 80px;
          height: 80px;
-         background-color: #222;
          border-radius: 8px;
-         box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+         overflow: hidden;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         background-color: transparent; 
+         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .card-face img {
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
       }
 
       .github-button {
          position: fixed;
-         bottom: 20px; /* Distancia desde la parte inferior */
-         left: 20px; /* Distancia desde la parte izquierda */
+         bottom: 20px; 
+         left: 20px; 
          padding: 12px 30px;
          font-size: 1rem;
          background-color: #ffcc00;
@@ -127,23 +137,30 @@
 
       function Game (){
          const characters = [
-            "https://kungfupanda.fandom.com/es/wiki/Po?file=Filmes_714_Kung-Fu-Panda-2-8.jpg", //po
-            "https://kungfupanda.fandom.com/es/wiki/Tigresa?file=KFP3-tigress.jpg", //Tigres
-            "https://kungfupanda.fandom.com/es/wiki/Mono?file=Mono_KFP2.png", //Mono
-            "https://kungfupanda.fandom.com/es/wiki/V%C3%ADbora?file=ViperKFP2.jpg", //Vibora
-            "https://kungfupanda.fandom.com/es/wiki/Grulla?file=CraneJanitor.jpg", //Grulla
-            "https://kungfupanda.fandom.com/es/wiki/Mantis?file=Kung-fu-panda-1868159-640-388.jpg", //Mantis
-            "https://kungfupanda.fandom.com/es/wiki/Shifu?file=800px-Kung_Fu_Panda_Holiday_Special_720p_HDTV-KmG.mkv_snapshot_15.02_-2012.02.13_18.06.13-.jpg", //shifu
-            "https://kungfupanda.fandom.com/es/wiki/Tai_Lung?file=Tai_Lung_Kung_Fu_Panda_1023.jpg", //Tai lung
+            "https://w1.pngwing.com/pngs/863/603/png-transparent-bear-kungfu-panda-po-master-shifu-giant-panda-tigress-tai-lung-kung-fu-panda-3-thumbnail.png", //po
+            "https://w7.pngwing.com/pngs/326/524/png-transparent-tigress-po-master-shifu-tai-lung-kung-fu-panda-kung-fu-panda-cat-like-mammal-carnivoran-tiger-thumbnail.png", //Tigres
+            "https://w7.pngwing.com/pngs/244/358/png-transparent-po-tigress-monkey-crane-oogway-kung-fu-panda-animals-hand-kung-fu-thumbnail.png", //Mono
+            "https://w7.pngwing.com/pngs/347/39/png-transparent-viper-po-tigress-master-shifu-kung-fu-panda-others-scaled-reptile-kung-fu-kungfu-panda-thumbnail.png", //Vibora
+            "https://w7.pngwing.com/pngs/722/629/png-transparent-po-crane-tigress-monkey-master-shifu-crane-technic-kung-fu-bird-thumbnail.png", //Grulla
+            "https://w7.pngwing.com/pngs/666/14/png-transparent-kung-fu-panda-mantis-mantis-po-master-shifu-tigress-viper-kung-fu-panda-animals-kung-fu-cartoon-thumbnail.png", //Mantis
+            "https://w7.pngwing.com/pngs/686/546/png-transparent-master-shifu-po-kung-fu-panda-voice-actor-others-kung-fu-snout-film-thumbnail.png", //shifu
+            "https://w7.pngwing.com/pngs/1023/553/png-transparent-kung-fu-panda-tiger-character-master-shifu-tai-lung-po-kung-fu-panda-kung-fu-panda-cartoon-film-kungfu-panda-thumbnail.png", //Tai lung
          ]
+
+         //Se duplica el arreglo para las parejas
          const allCards = [...characters, ...characters];
-         const totalCards = 16;
-         const emptyCards = Array(totalCards).fill(null);
+
+         //Mezcla de las cartas aleatorias
+         const shuffleCards = React.useMemo(() => {
+            return [...allCards].sort(() => 0.5 - Math.random());
+         }, []);
 
          return (
             <div className="game-board">
-               {emptyCards.map((_, index)=> (
-                  <div key = {index} className="card-placeholder"></div>
+               {shuffleCards.map((imgUrl, index)=> (
+                  <div key = {index} className="card-face">
+                     <img src = {imgUrl} alt= {"charcater ${index}"} /> 
+                  </div>
                ))}
             </div>
          );
