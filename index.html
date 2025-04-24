@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Kung Fu Panda - Memory Game </title>
+
+   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+   <style>
+      * {
+         box-sizing: border-box;
+      }
+
+      body, html{
+         margin: 0;
+         padding: 0;
+         height: 100vh;
+         font-family: "Segoe UI", sans-serif;
+         background-image: url("fondoprincipal.jpeg") ;
+         background-size: cover;
+         background-position: center;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+      }
+
+      .menu {
+         background-color: rgba(0,0,0,0.7);
+         padding: 40px;
+         border-radius: 15px;
+         text-align: center;
+         color: white;
+      }
+
+      .menu h1{
+         font-size: 2.5rem;
+         margin-bottom: 20px;
+      }
+
+      .menu button{
+         padding: 12px 30px;
+         font-size: 1.2rem;
+         background-color: #ffcc00;
+         color: black;
+         border:none;
+         border-radius: 10px;
+         cursor: pointer;
+         transition: 0.3s;
+      }
+
+      .menu button:hover {
+         background-color: #ffd633;
+      }
+
+   </style>
+</head>
+<body>
+   <div id="root"></div>
+   <script type="text/babel">
+      const { useState } = React;
+
+      function App(){
+         const [started, setStarted] = useState(false);
+
+         return (
+            started
+            ? <Game />
+            : <Menu onStart = {() => setStarted(true)}/>
+         );
+      }
+
+      function Menu ({onStart}){
+         return (
+            <div className = "menu">
+               <h1> Kung Fu panda - Memory Game </h1>
+               <button onClick = {onStart}> Begin </button>
+            </div>
+         );
+      }
+
+      function Game (){
+         const totalCards = 16;
+         const emptycards = Array(totalCards).fill(null);
+
+         return (
+            <div className="game-board">
+               {emptyCards.map((_, index)=> (
+                  <div key = {index} className="card-placeholder"></div>
+               ))}
+            </div>
+         );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />)
+   </script>
+</body>
+</html>
