@@ -22,6 +22,7 @@
          background-image: url("fondoprincipal.jpeg") ;
          background-size: cover;
          background-position: center;
+         background-attachment: fixed;
          display: flex;
          justify-content: center;
          align-items: center;
@@ -55,6 +56,43 @@
          background-color: #ffd633;
       }
 
+      .game-board{
+         display: grid;
+         grid-template-columns: repeat(4,84px);
+         gap: 50px;
+         padding: 25px;
+         background-color: rgba(110, 205, 218, 0.6);
+         border-radius: 12px;
+         margin-top: 20px;
+         border: 5px solid #ffcc00;
+      }
+
+      .card-placeholder {
+         width: 80px;
+         height: 80px;
+         background-color: #222;
+         border-radius: 8px;
+         box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      }
+
+      .github-button {
+         position: fixed;
+         bottom: 20px; /* Distancia desde la parte inferior */
+         left: 20px; /* Distancia desde la parte izquierda */
+         padding: 12px 30px;
+         font-size: 1rem;
+         background-color: #ffcc00;
+         color: black;
+         border: none;
+         border-radius: 10px;
+         cursor: pointer;
+         transition: 0.3s;
+      }
+
+      .github-button:hover {
+         background-color: #ffd633;
+      }
+
    </style>
 </head>
 <body>
@@ -72,18 +110,35 @@
          );
       }
 
-      function Menu ({onStart}){
-         return (
-            <div className = "menu">
-               <h1> Kung Fu panda - Memory Game </h1>
-               <button onClick = {onStart}> Begin </button>
-            </div>
-         );
-      }
+   function Menu({ onStart }) {
+      return (
+         <div className="menu">
+            <h1> Kung Fu Panda - Memory Game </h1>
+            <button onClick={onStart}> Begin </button>
+            <button
+               className="github-button"
+               onClick={() => window.open("https://github.com/nicoCT04/Kungfu-memory.git", "_blank")}
+            >
+               GitHub
+            </button>
+         </div>
+      );
+   }
 
       function Game (){
+         const characters = [
+            "https://kungfupanda.fandom.com/es/wiki/Po?file=Filmes_714_Kung-Fu-Panda-2-8.jpg", //po
+            "https://kungfupanda.fandom.com/es/wiki/Tigresa?file=KFP3-tigress.jpg", //Tigres
+            "https://kungfupanda.fandom.com/es/wiki/Mono?file=Mono_KFP2.png", //Mono
+            "https://kungfupanda.fandom.com/es/wiki/V%C3%ADbora?file=ViperKFP2.jpg", //Vibora
+            "https://kungfupanda.fandom.com/es/wiki/Grulla?file=CraneJanitor.jpg", //Grulla
+            "https://kungfupanda.fandom.com/es/wiki/Mantis?file=Kung-fu-panda-1868159-640-388.jpg", //Mantis
+            "https://kungfupanda.fandom.com/es/wiki/Shifu?file=800px-Kung_Fu_Panda_Holiday_Special_720p_HDTV-KmG.mkv_snapshot_15.02_-2012.02.13_18.06.13-.jpg", //shifu
+            "https://kungfupanda.fandom.com/es/wiki/Tai_Lung?file=Tai_Lung_Kung_Fu_Panda_1023.jpg", //Tai lung
+         ]
+         const allCards = [...characters, ...characters];
          const totalCards = 16;
-         const emptycards = Array(totalCards).fill(null);
+         const emptyCards = Array(totalCards).fill(null);
 
          return (
             <div className="game-board">
