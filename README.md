@@ -77,18 +77,7 @@ You can find the project's source code at the following link:
 
 ---
 
-## Screenshots
 
-### Main Menu
-![Main Menu](https://via.placeholder.com/600x300?text=Main+Menu)
-
-### Game
-![Game](https://via.placeholder.com/600x300?text=Game)
-
-### Victory Message
-![Victory Message](https://via.placeholder.com/600x300?text=Victory+Message)
-
----
 
 ## Future Improvements
 
