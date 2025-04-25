@@ -85,6 +85,40 @@
          object-fit: cover;
       }
 
+      .card-placeholder {
+         width: 80px;
+         height: 80px;
+         background-color: #fff;
+         border-radius: 8px;
+         overflow: hidden;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         position: relative;
+         cursor: pointer;
+         transition: transform 0.5s;
+      }
+
+      .card-placeholder.flipped {
+         transform: rotateY(180deg); 
+      }
+
+      .card-placeholder .card-back {
+         width: 100%;
+         height: 100%;
+         background-color: #222;
+         border-radius: 8px;
+         position: absolute;
+         backface-visibility: hidden;
+      }
+
+      .card-placeholder img {
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+         backface-visibility: hidden;
+      }
+
       .github-button {
          position: fixed;
          bottom: 20px; 
@@ -137,14 +171,14 @@
 
       function Game (){
          const characters = [
-            "https://w1.pngwing.com/pngs/863/603/png-transparent-bear-kungfu-panda-po-master-shifu-giant-panda-tigress-tai-lung-kung-fu-panda-3-thumbnail.png", //po
-            "https://w7.pngwing.com/pngs/326/524/png-transparent-tigress-po-master-shifu-tai-lung-kung-fu-panda-kung-fu-panda-cat-like-mammal-carnivoran-tiger-thumbnail.png", //Tigres
-            "https://w7.pngwing.com/pngs/244/358/png-transparent-po-tigress-monkey-crane-oogway-kung-fu-panda-animals-hand-kung-fu-thumbnail.png", //Mono
-            "https://w7.pngwing.com/pngs/347/39/png-transparent-viper-po-tigress-master-shifu-kung-fu-panda-others-scaled-reptile-kung-fu-kungfu-panda-thumbnail.png", //Vibora
-            "https://w7.pngwing.com/pngs/722/629/png-transparent-po-crane-tigress-monkey-master-shifu-crane-technic-kung-fu-bird-thumbnail.png", //Grulla
-            "https://w7.pngwing.com/pngs/666/14/png-transparent-kung-fu-panda-mantis-mantis-po-master-shifu-tigress-viper-kung-fu-panda-animals-kung-fu-cartoon-thumbnail.png", //Mantis
-            "https://w7.pngwing.com/pngs/686/546/png-transparent-master-shifu-po-kung-fu-panda-voice-actor-others-kung-fu-snout-film-thumbnail.png", //shifu
-            "https://w7.pngwing.com/pngs/1023/553/png-transparent-kung-fu-panda-tiger-character-master-shifu-tai-lung-po-kung-fu-panda-kung-fu-panda-cartoon-film-kungfu-panda-thumbnail.png", //Tai lung
+            "https://i.pinimg.com/736x/66/70/df/6670df57b617a63437be60cee7c1dac2.jpg", //po
+            "https://i.pinimg.com/736x/48/2c/02/482c02be9668077e2fa448599f0b7d17.jpg", //Tigres
+            "https://i.pinimg.com/736x/f8/c1/94/f8c194f1950356c678c9d5a456b7d959.jpg", //Mono
+            "https://i.pinimg.com/736x/cd/2b/90/cd2b909d26bfcb516c8cba69f898d52d.jpg", //Vibora
+            "https://i.pinimg.com/736x/a2/77/e6/a277e636c66f7eac6c99a4ca6e01f777.jpg", //Grulla
+            "https://i.pinimg.com/736x/4b/ed/bb/4bedbb95dc64c47bc0c56bf2f565c22c.jpg", //Mantis
+            "https://i.pinimg.com/736x/fe/55/1a/fe551aebdb42cb38dd7b4b94c89ab535.jpg", //shifu
+            "https://i.pinimg.com/736x/7d/21/2c/7d212cb3b1276517e960fdfda0e98b2b.jpg", //Tai lung
          ]
 
          //Se duplica el arreglo para las parejas
@@ -155,13 +189,68 @@
             return [...allCards].sort(() => 0.5 - Math.random());
          }, []);
 
+
+         //Estado para las cartas
+         const [flippedCards, setFlippedCards] = React.useState([]);
+         const [matchedCards, setMatchedCards] = React.useState([]);
+         const [gameCompleted, setGameCompleted] = React.useState(false);
+
+         //funcion para manejar el click de la carta
+         const handleClick = (index) => {
+            // Evitar levantar más de 2 cartas o si ya terminó el juego
+            if (flippedCards.length === 2 || flippedCards.includes(index) || gameCompleted) {
+               return;
+            }
+
+            // Voltear la carta seleccionada
+            setFlippedCards([...flippedCards, index]);
+
+            // Si ya hay una carta volteada, verificar si coinciden
+            if (flippedCards.length === 1) {
+               const firstCardIndex = flippedCards[0];
+               const secondCardIndex = index;
+
+               // Verificar si las cartas son iguales
+               if (shuffleCards[firstCardIndex] === shuffleCards[secondCardIndex]) {
+                  // Usamos la función de setMatchedCards para actualizar el estado correctamente
+                  setMatchedCards(prevMatchedCards => [
+                  ...prevMatchedCards, 
+                  firstCardIndex, 
+                  secondCardIndex
+                  ]);
+               }
+
+               // Voltear las cartas después de 1 segundo
+               setTimeout(() => {
+                  setFlippedCards([]); // Volteamos las cartas
+               }, 1000);
+            }
+         };
+
+
+         // Verificación de fin de juego
+         React.useEffect(() => {
+            if (matchedCards.length === characters.length * 2) {
+               setGameCompleted(true);
+            }
+         }, [matchedCards]);
+
          return (
             <div className="game-board">
                {shuffleCards.map((imgUrl, index)=> (
-                  <div key = {index} className="card-face">
-                     <img src = {imgUrl} alt= {"charcater ${index}"} /> 
+                  <div key = {index} 
+                  className={`card-placeholder ${flippedCards.includes(index) || matchedCards.includes(index) ? "flipped" : ""}`}
+                  onClick={() => handleClick(index)}
+                  >
+                  {flippedCards.includes(index) || matchedCards.includes(index) ? (
+                     <img src = {imgUrl} alt={`character ${index}`} /> 
+                  ) : (
+                     <div className = "card-back"></div>
+                  )}
+                     
                   </div>
                ))}
+               {gameCompleted && <h2> ¡Felicidades! Has ganado el juego 🏆 </h2>}
             </div>
          );
       }
