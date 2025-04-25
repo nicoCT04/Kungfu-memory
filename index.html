@@ -119,6 +119,60 @@
          backface-visibility: hidden;
       }
 
+      .game-container {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         gap: 20px;
+         
+      }
+
+      .moves-counter-container{
+         background-color: rgba(110, 205, 218, 0.6);
+         border: 5px solid #ffcc00;
+         color: black;
+         padding: 10px 20px;
+         border-radius: 10px;
+         font-size: 1.5rem;
+         text-align: center;
+         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+         
+      }
+
+      .victory-message {
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         background-color: rgba(0, 0, 0, 0.8);
+         color: white;
+         padding: 20px 40px;
+         border-radius: 10px;
+         text-align: center;
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+         z-index: 10;
+      }
+
+      .victory-message h2 {
+         margin-bottom: 20px;
+         font-size: 2rem;
+      }
+
+      .victory-message button {
+         padding: 10px 20px;
+         font-size: 1.2rem;
+         background-color: #ffcc00;
+         color: black;
+         border: none;
+         border-radius: 5px;
+         cursor: pointer;
+         transition: background-color 0.3s;
+      }
+
+      .victory-message button:hover {
+         background-color: #ffd633;
+      }
       .github-button {
          position: fixed;
          bottom: 20px; 
@@ -185,15 +239,16 @@
          const allCards = [...characters, ...characters];
 
          //Mezcla de las cartas aleatorias
-         const shuffleCards = React.useMemo(() => {
+         const [shuffledCards, setShuffledCards] = React.useState(() => {
             return [...allCards].sort(() => 0.5 - Math.random());
-         }, []);
+         });
 
 
          //Estado para las cartas
          const [flippedCards, setFlippedCards] = React.useState([]);
          const [matchedCards, setMatchedCards] = React.useState([]);
          const [gameCompleted, setGameCompleted] = React.useState(false);
+         const [moves, setMoves] = React.useState(0);
 
          //funcion para manejar el click de la carta
          const handleClick = (index) => {
@@ -204,6 +259,7 @@
 
             // Voltear la carta seleccionada
             setFlippedCards([...flippedCards, index]);
+            setMoves (moves + 1);
 
             // Si ya hay una carta volteada, verificar si coinciden
             if (flippedCards.length === 1) {
@@ -211,7 +267,7 @@
                const secondCardIndex = index;
 
                // Verificar si las cartas son iguales
-               if (shuffleCards[firstCardIndex] === shuffleCards[secondCardIndex]) {
+               if (shuffledCards[firstCardIndex] === shuffledCards[secondCardIndex]) {
                   // Usamos la función de setMatchedCards para actualizar el estado correctamente
                   setMatchedCards(prevMatchedCards => [
                   ...prevMatchedCards, 
@@ -225,8 +281,18 @@
                   setFlippedCards([]); // Volteamos las cartas
                }, 1000);
             }
+
+            
          };
 
+
+         const resetGame = () => {
+            setFlippedCards([]);
+            setMatchedCards([]);
+            setGameCompleted(false);
+            setMoves(0);
+            setShuffledCards([...allCards].sort(()=> 0.5 - Math.random()));
+         };
 
          // Verificación de fin de juego
          React.useEffect(() => {
@@ -236,21 +302,33 @@
          }, [matchedCards]);
 
          return (
-            <div className="game-board">
-               {shuffleCards.map((imgUrl, index)=> (
-                  <div key = {index} 
-                  className={`card-placeholder ${flippedCards.includes(index) || matchedCards.includes(index) ? "flipped" : ""}`}
-                  onClick={() => handleClick(index)}
-                  >
-                  {flippedCards.includes(index) || matchedCards.includes(index) ? (
-                     <img src = {imgUrl} alt={`character ${index}`} /> 
-                  ) : (
-                     <div className = "card-back"></div>
+            <div className="game-container">
+               <div className="moves-counter-container">
+                  <h2>Movimientos: {moves}</h2>
+               </div>
+               <div className="game-board">
+                  {shuffledCards.map((imgUrl, index) => (
+                     <div
+                        key={index}
+                        className={`card-placeholder ${
+                           flippedCards.includes(index) || matchedCards.includes(index) ? "flipped" : ""
+                        }`}
+                        onClick={() => handleClick(index)}
+                     >
+                        {flippedCards.includes(index) || matchedCards.includes(index) ? (
+                           <img src={imgUrl} alt={`character ${index}`} />
+                        ) : (
+                           <div className="card-back"></div>
+                        )}
+                     </div>
+                  ))}
+                  {gameCompleted && (
+                     <div className = "victory-message">
+                        <h2>¡Has ganado!</h2>
+                        <button onClick = {resetGame}> Volver a jugar </button>
+                     </div>
                   )}
-                     
-                  </div>
-               ))}
-               {gameCompleted && <h2> ¡Felicidades! Has ganado el juego 🏆 </h2>}
+               </div>
             </div>
          );
       }
