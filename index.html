@@ -173,12 +173,13 @@
       .victory-message button:hover {
          background-color: #ffd633;
       }
-      .github-button {
+      .github-button, .return-button {
+         font-family: "Segoe UI", sans-serif;
          position: fixed;
          bottom: 20px; 
          left: 20px; 
          padding: 12px 30px;
-         font-size: 1rem;
+         font-size: 1.2rem;
          background-color: #ffcc00;
          color: black;
          border: none;
@@ -191,6 +192,10 @@
          background-color: #ffd633;
       }
 
+      .return-button:hover{
+         background-color: #ffd633;
+      }
+
    </style>
 </head>
 <body>
@@ -198,32 +203,32 @@
    <script type="text/babel">
       const { useState } = React;
 
-      function App(){
-         const [started, setStarted] = useState(false);
+      function App() {
+         const [started, setStarted] = React.useState(false);
 
          return (
             started
-            ? <Game />
-            : <Menu onStart = {() => setStarted(true)}/>
+               ? <Game setStarted={setStarted} /> 
+               : <Menu onStart={() => setStarted(true)} />
          );
       }
 
-   function Menu({ onStart }) {
-      return (
-         <div className="menu">
-            <h1> Kung Fu Panda - Memory Game </h1>
-            <button onClick={onStart}> Begin </button>
-            <button
-               className="github-button"
-               onClick={() => window.open("https://github.com/nicoCT04/Kungfu-memory.git", "_blank")}
-            >
-               GitHub
-            </button>
-         </div>
-      );
-   }
+      function Menu({ onStart }) {
+         return (
+            <div className="menu">
+               <h1> Kung Fu Panda - Memory Game </h1>
+               <button onClick={onStart}> Begin </button>
+               <button
+                  className="github-button"
+                  onClick={() => window.open("https://github.com/nicoCT04/Kungfu-memory.git", "_blank")}
+               >
+                  GitHub
+               </button>
+            </div>
+         );
+      }
 
-      function Game (){
+      function Game({ setStarted }) {
          const characters = [
             "https://i.pinimg.com/736x/66/70/df/6670df57b617a63437be60cee7c1dac2.jpg", //po
             "https://i.pinimg.com/736x/48/2c/02/482c02be9668077e2fa448599f0b7d17.jpg", //Tigres
@@ -328,6 +333,9 @@
                         <button onClick = {resetGame}> Volver a jugar </button>
                      </div>
                   )}
+               </div>
+               <div className="return-button" onClick={() => setStarted(false)}>
+                  Regresar al inicio
                </div>
             </div>
          );
