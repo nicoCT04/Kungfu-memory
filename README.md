@@ -1,4 +1,4 @@
-# Kung Fu Panda Memory Game
+# Kung Fu Panda Memory Game by NicoCT04
 
 ## Description
 
@@ -59,13 +59,6 @@ The project is contained in a single HTML file that includes:
    - **Play Again:** Shuffles the cards and restarts the game.
    - **Return to Menu:** Returns to the main menu.
 
----
-
-## How to Run the Project
-
-1. Download the project's HTML file.
-2. Open the file in any modern browser (such as Chrome or Firefox).
-3. Enjoy the game!
 
 ---
 
