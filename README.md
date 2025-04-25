@@ -1,102 +1,102 @@
 # Kung Fu Panda Memory Game
 
-## Descripción
+## Description
 
-Este proyecto es un juego de memoria inspirado en *Kung Fu Panda*. El objetivo del juego es emparejar todas las cartas en el menor número de movimientos posible. El juego está desarrollado en **React** y utiliza un solo archivo HTML con Babel para compilar JSX directamente en el navegador.
-
----
-
-## Características
-
-- **Grid de 4x4 cartas:** Las cartas están organizadas en una cuadrícula de 4x4.
-- **Cartas aleatorias:** Las cartas se mezclan aleatoriamente cada vez que se inicia o reinicia el juego.
-- **Animación de flip:** Las cartas tienen una animación suave al voltearse.
-- **Contador de movimientos:** Muestra el número de movimientos realizados por el jugador.
-- **Mensaje de victoria:** Aparece un mensaje cuando el jugador empareja todas las cartas.
-- **Botón "Volver a jugar":** Permite reiniciar el juego con una nueva mezcla de cartas.
-- **Botón "Regresar al inicio":** Permite regresar al menú principal.
-- **Botón de GitHub:** Enlace al repositorio del proyecto.
+This project is a memory game inspired by *Kung Fu Panda*. The goal of the game is to match all the cards in the fewest moves possible. The game is developed in **React** and uses a single HTML file with Babel to compile JSX directly in the browser.
 
 ---
 
-## Tecnologías utilizadas
+## Features
 
-- **React:** Para la creación de componentes y manejo del estado.
-- **Babel:** Para compilar JSX directamente en el navegador.
-- **HTML y CSS:** Para la estructura y diseño del juego.
-
----
-
-## Estructura del proyecto
-
-El proyecto está contenido en un único archivo HTML que incluye:
-
-1. **Estilos CSS:** Para el diseño del juego, animaciones y botones.
-2. **Componentes React:**
-   - `App`: Componente principal que controla si se muestra el menú o el juego.
-   - `Menu`: Componente del menú principal con botones para iniciar el juego y acceder al repositorio de GitHub.
-   - `Game`: Componente del juego que incluye la lógica de las cartas, el contador de movimientos y el mensaje de victoria.
+- **4x4 card grid:** The cards are organized in a 4x4 grid.
+- **Randomized cards:** The cards are shuffled randomly every time the game starts or restarts.
+- **Flip animation:** The cards have a smooth flip animation.
+- **Move counter:** Displays the number of moves made by the player.
+- **Victory message:** A message appears when the player matches all the cards.
+- **"Play Again" button:** Allows restarting the game with a new shuffle of cards.
+- **"Return to Menu" button:** Allows returning to the main menu.
+- **GitHub button:** Link to the project's repository.
 
 ---
 
-## Cómo jugar
+## Technologies Used
 
-1. **Inicio:**
-   - Al cargar la página, se muestra el menú principal con el título del juego y dos botones:
-     - **Begin:** Inicia el juego.
-     - **GitHub:** Abre el repositorio del proyecto en una nueva pestaña.
-
-2. **Juego:**
-   - Haz clic en las cartas para voltearlas.
-   - Si las dos cartas seleccionadas coinciden, permanecen volteadas.
-   - Si no coinciden, se voltean nuevamente después de 1 segundo.
-   - El objetivo es emparejar todas las cartas en el menor número de movimientos posible.
-
-3. **Victoria:**
-   - Cuando todas las cartas están emparejadas, aparece un mensaje de victoria con un botón para reiniciar el juego.
-
-4. **Opciones:**
-   - **Volver a jugar:** Mezcla las cartas y reinicia el juego.
-   - **Regresar al inicio:** Vuelve al menú principal.
+- **React:** For creating components and managing state.
+- **Babel:** To compile JSX directly in the browser.
+- **HTML and CSS:** For the structure and design of the game.
 
 ---
 
-## Cómo ejecutar el proyecto
+## Project Structure
 
-1. Descarga el archivo HTML del proyecto.
-2. Abre el archivo en cualquier navegador moderno (como Chrome o Firefox).
-3. ¡Disfruta del juego!
+The project is contained in a single HTML file that includes:
+
+1. **CSS Styles:** For the game's design, animations, and buttons.
+2. **React Components:**
+   - `App`: Main component that controls whether the menu or the game is displayed.
+   - `Menu`: Main menu component with buttons to start the game and access the GitHub repository.
+   - `Game`: Game component that includes the card logic, move counter, and victory message.
 
 ---
 
-## Enlace al repositorio
+## How to Play
 
-Puedes encontrar el código fuente del proyecto en el siguiente enlace:
+1. **Start:**
+   - When the page loads, the main menu is displayed with the game's title and two buttons:
+     - **Begin:** Starts the game.
+     - **GitHub:** Opens the project's repository in a new tab.
+
+2. **Game:**
+   - Click on the cards to flip them.
+   - If the two selected cards match, they remain flipped.
+   - If they do not match, they flip back after 1 second.
+   - The goal is to match all the cards in the fewest moves possible.
+
+3. **Victory:**
+   - When all the cards are matched, a victory message appears with a button to restart the game.
+
+4. **Options:**
+   - **Play Again:** Shuffles the cards and restarts the game.
+   - **Return to Menu:** Returns to the main menu.
+
+---
+
+## How to Run the Project
+
+1. Download the project's HTML file.
+2. Open the file in any modern browser (such as Chrome or Firefox).
+3. Enjoy the game!
+
+---
+
+## Repository Link
+
+You can find the project's source code at the following link:
 
 [Kung Fu Panda Memory Game - GitHub](https://github.com/nicoCT04/Kungfu-memory.git)
 
 ---
 
-## Capturas de pantalla
+## Screenshots
 
-### Menú principal
-![Menú principal](https://via.placeholder.com/600x300?text=Men%C3%BA+principal)
+### Main Menu
+![Main Menu](https://via.placeholder.com/600x300?text=Main+Menu)
 
-### Juego
-![Juego](https://via.placeholder.com/600x300?text=Juego)
+### Game
+![Game](https://via.placeholder.com/600x300?text=Game)
 
-### Mensaje de victoria
-![Mensaje de victoria](https://via.placeholder.com/600x300?text=Mensaje+de+victoria)
-
----
-
-## Mejoras futuras
-
-- Agregar niveles de dificultad con diferentes tamaños de grid (por ejemplo, 6x6 o 8x8).
-- Implementar un temporizador para medir el tiempo que toma completar el juego.
-- Guardar el puntaje más alto en el almacenamiento local del navegador.
-- Agregar efectos de sonido al voltear las cartas o ganar el juego.
+### Victory Message
+![Victory Message](https://via.placeholder.com/600x300?text=Victory+Message)
 
 ---
 
-¡Gracias por jugar! 😊
+## Future Improvements
+
+- Add difficulty levels with different grid sizes (e.g., 6x6 or 8x8).
+- Implement a timer to measure the time taken to complete the game.
+- Save the highest score in the browser's local storage.
+- Add sound effects when flipping cards or winning the game.
+
+---
+
+Thank you for playing! 😊
