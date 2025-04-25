@@ -85,7 +85,8 @@
          object-fit: cover;
       }
 
-      .card-placeholder {
+      /* Define el contenedor general de la carta*/
+      .card-placeholder{  
          width: 80px;
          height: 80px;
          background-color: #fff;
@@ -103,14 +104,17 @@
          transform: rotateY(180deg); 
       }
 
+      /* define la parte trasera */
       .card-placeholder .card-back {
          width: 100%;
          height: 100%;
-         background-color: #222;
+         background-image: url("https://i.pinimg.com/736x/35/98/80/359880b61da0729b506c154d6a71e60c.jpg");
+         background-size: cover; 
+         background-position: center; 
          border-radius: 8px;
          position: absolute;
          backface-visibility: hidden;
-      }
+      }     
 
       .card-placeholder img {
          width: 100%;
